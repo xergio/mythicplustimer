@@ -487,6 +487,9 @@ function criteria.update_step(step_index, current_run, name, completed, cur_valu
   if step_index == 1 or not show_bosses then
     step_frame:SetPoint("TOPLEFT", timer.get_time_3_frame(), "BOTTOMLEFT", 0, -20)
     -- This is a bit weird, we are overlapping all the frames in the same spot when no bosses are shown, and then showing only the last one.
+  else
+    -- reposition the frames
+    step_frame:SetPoint("TOPLEFT", step_frames[step_index - 1], "BOTTOMLEFT", 0, -5)
   end
 
   -- we are doing a lot of logic to then hide the frame :/
@@ -549,4 +552,5 @@ function criteria:enable()
   addon.register_config_listener("color_objective_completed", on_config_change)
   addon.register_config_listener("color_objective_completed_time", on_config_change)
   addon.register_config_listener("color_current_pull", on_config_change)
+  addon.register_config_listener("show_bosses", on_config_change)
 end
