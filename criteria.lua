@@ -486,7 +486,11 @@ function criteria.update_step(step_index, current_run, name, completed, cur_valu
     step_frame:SetPoint("TOPLEFT", timer.get_time_3_frame(), "BOTTOMLEFT", 0, -20)
   end
 
-  step_frame:Show()
+  if addon.c("show_bosses") then
+    step_frame:Show()
+  else
+    step_frame:Hide()
+  end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

@@ -26,6 +26,7 @@ local CONFIG_VALUES = {
   scale = 1.0,
   show_pull_values = false,
   show_pridefultimer = true,
+  show_bosses = true,
   --
   position = {left = -260, top = 220, relative_point = "RIGHT"},
   --
@@ -170,6 +171,7 @@ local function on_category_refresh(self)
     "show_affixes_as_text",
     "show_affixes_as_icons",
     "hide_default_objectivetracker",
+    "show_bosses",
     --    "show_reapingtimer"
     "show_pridefultimer",
   }
