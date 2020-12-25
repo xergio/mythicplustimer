@@ -481,12 +481,16 @@ function criteria.update_step(step_index, current_run, name, completed, cur_valu
     end
   end
 
+  local show_bosses = addon.c("show_bosses")
+
   -- show frame
-  if step_index == 1 then
+  if step_index == 1 or not show_bosses then
     step_frame:SetPoint("TOPLEFT", timer.get_time_3_frame(), "BOTTOMLEFT", 0, -20)
+    -- This is a bit weird, we are overlapping all the frames in the same spot when no bosses are shown, and then showing only the last one.
   end
 
-  if addon.c("show_bosses") then
+  -- we are doing a lot of logic to then hide the frame :/
+  if show_bosses or step_frame == criteria.get_last_frame(current_run) then
     step_frame:Show()
   else
     step_frame:Hide()
