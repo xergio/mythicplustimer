@@ -223,32 +223,21 @@ local function on_category_refresh(self)
   end, 0.5, 3, 0.1, addon.c("scale"), slider_tooltip, self)
   slider:SetPoint("TOPLEFT", checkboxes_frames[#checkboxes_frames], "BOTTOMLEFT", 0, -10)
 
-  -- buttons
-  local buttons = {"reset_scale"}
+  -- reset button
+  local button_name = addon.t("config_reset_scale")
 
-  local buttons_frames = {}
-  for i, key in ipairs(buttons) do
-    local button_name = addon.t("config_" .. key)
+  local tooltip = {}
+  table.insert(tooltip, button_name)
+  table.insert(tooltip, "|cFFFFFFFF" .. addon.t("config_desc_reset_scale"))
 
-    local tooltip = {}
-    table.insert(tooltip, button_name)
-    table.insert(tooltip, "|cFFFFFFFF" .. addon.t("config_desc_" .. key))
+  local button = config_gui.create_button("reset_scale", button_name, on_button_click, tooltip, self)
+  button:SetPoint("TOPLEFT", slider, "TOPRIGHT", 10, -10)
 
-    local button = config_gui.create_button(key, button_name, on_button_click, tooltip, self)
-    if i == 1 then
-      button:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", 0, -3)
-    else
-      button:SetPoint("TOPLEFT", buttons_frames[i - 1], "BOTTOMLEFT", 0, -3)
-    end
-
-    button:SetPoint("RIGHT", -10, 0)
-
-    buttons_frames[i] = button
-  end
+  button:SetPoint("RIGHT", -10, 0)
 
   -- line
   local line = config_gui.create_line(self)
-  line:SetPoint("TOPLEFT", buttons_frames[#buttons_frames], "BOTTOMLEFT", 0, -3)
+  line:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", 0, -3)
 
   -- scary buttons
   local scary_buttons = {"delete_besttimes", "delete_npcprogress"}
@@ -265,7 +254,7 @@ local function on_category_refresh(self)
     if i == 1 then
       button:SetPoint("TOPLEFT", line, "BOTTOMLEFT", 0, -3)
     else
-      button:SetPoint("TOPLEFT", scary_buttons_frames[i - 1], "BOTTOMLEFT", 0, -3)
+      button:SetPoint("TOPLEFT", scary_buttons_frames[i - 1], "BOTTOMLEFT", 0, -2)
     end
 
     button:SetPoint("RIGHT", -10, 0)
